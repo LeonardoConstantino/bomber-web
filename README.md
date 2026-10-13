@@ -18,7 +18,7 @@ Construído inteiramente no navegador com física determinística, inimigos inte
 
 <br />
 
-👉 **[JOGAR AGORA NO GITHUB PAGES](https://leohconstantino.github.io/bomber-web/)** 👈
+👉 **[JOGAR AGORA NO GITHUB PAGES](https://leonardoconstantino.github.io/bomber-web/)** 👈
 
 <br />
 

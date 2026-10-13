@@ -1,0 +1,8 @@
+{
+  "name": "BomberWeb",
+  "description": "An offline-first, client-side classic Bomberman reimagining featuring deterministic ghost replays, procedural and custom map editor, shareable seeds, and 4 rich AI enemy archetypes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

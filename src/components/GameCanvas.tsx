@@ -72,6 +72,7 @@ export default function GameCanvas({
   const [winTime, setWinTime] = useState<number>(0);
   const [isNewRecord, setIsNewRecord] = useState(false);
   const [shareLink, setShareLink] = useState('');
+  const [restartKey, setRestartKey] = useState(0);
 
   // World states (using mutable refs for the high-performance game loop, syncing to React state only when phase changes)
   const stateRef = useRef<WorldState | null>(null);
@@ -203,6 +204,9 @@ export default function GameCanvas({
     playerInputs.current = [];
     particles.current = [];
     floatTexts.current = [];
+    setWinTime(0);
+    setIsNewRecord(false);
+    setShareLink('');
     setGamePhase(watchOnly ? 'watching' : 'playing');
 
     // Setup input listeners
@@ -261,7 +265,7 @@ export default function GameCanvas({
       window.removeEventListener('keyup', handleKeyUp);
       audio.stopMusic();
     };
-  }, [map, playAgainstGhost, watchOnly]);
+  }, [map, playAgainstGhost, watchOnly, restartKey]);
 
   // Sync mute state
   useEffect(() => {
@@ -614,6 +618,8 @@ export default function GameCanvas({
           });
         } else {
           state.player.alive = false;
+          state.phase = 'lose';
+          audio.stopMusic();
           audio.playDefeat();
           spawnExplosionParticles(state.player.position.x, state.player.position.y, '#EF4444');
           setGamePhase('lose');
@@ -646,13 +652,21 @@ export default function GameCanvas({
     // --- 8. WIN CONDITIONS ---
     const livingBots = state.bots.filter(b => b.alive).length;
     if (state.player.alive && livingBots === 0 && state.phase === 'playing') {
+      state.phase = 'win';
       setGamePhase('win');
       setWinTime(state.timeElapsed);
+      audio.stopMusic();
       audio.playVictory();
 
       // Save record!
       const isNew = savePersonalRecord(map.seed || '', map.name, state.timeElapsed);
       setIsNewRecord(isNew);
+    } else if (state.phase === 'watching' && livingBots === 0) {
+      state.phase = 'win';
+      setGamePhase('win');
+      setWinTime(state.timeElapsed);
+      audio.stopMusic();
+      audio.playVictory();
     }
 
     // Update particles life
@@ -1353,7 +1367,7 @@ export default function GameCanvas({
   // Quick restart mapping
   const handleRestart = () => {
     audio.playClick();
-    window.location.reload();
+    setRestartKey(k => k + 1);
   };
 
   return (
@@ -1383,7 +1397,9 @@ export default function GameCanvas({
           <div className="flex items-center gap-1 bg-neutral-900 px-3 py-1.5 rounded-lg border border-neutral-800">
             <Clock className="w-4 h-4 text-amber-400" />
             <span>
-              {stateRef.current ? stateRef.current.timeElapsed.toFixed(1) : '0.0'}s
+              {stateRef.current
+                ? (gamePhase === 'win' ? winTime : stateRef.current.timeElapsed).toFixed(1)
+                : '0.0'}s
             </span>
           </div>
 

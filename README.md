@@ -9,7 +9,7 @@ Construído inteiramente no navegador com física determinística, inimigos inte
 
 ---
 
-[![Deploy Status](https://img.shields.io/github/actions/workflow/status/leohconstantino/bomber-web/deploy.yml?branch=main&label=Deploy&logo=github&style=for-the-badge)](https://github.com/leohconstantino/bomber-web/actions)
+[![Deploy Status](https://img.shields.io/github/actions/workflow/status/leonardoconstantino/bomber-web/deploy.yml?branch=main&label=Deploy&logo=github&style=for-the-badge)](https://github.com/leonardoconstantino/bomber-web/actions)
 [![React 19](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-6.2-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
@@ -73,7 +73,7 @@ Construído inteiramente no navegador com física determinística, inimigos inte
 
 1. **Clone o repositório:**
    ```bash
-   git clone https://github.com/leohconstantino/bomber-web.git
+   git clone https://github.com/leonardoconstantino/bomber-web.git
    cd bomber-web
    ```
 
